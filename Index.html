@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noah & Hanna</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --fg: #222;
+      --accent: #3a7bd5;
+      --accent2: #00d2ff;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    main {
+      background: var(--bg);
+      padding: 2rem 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+    .pulse {
+      margin-top: 1.5rem;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      margin-inline: auto;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.4; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Welcome to Noah & Hanna’s Page</h1>
+    <p>A simple start. Built for testing, dreaming, and launching ideas.</p>
+    <div class="pulse"></div>
+    <footer>© <span id="year"></span> Noah & Hanna — Made with ❤️</footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
