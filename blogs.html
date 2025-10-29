@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HuntersGo | Blog</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo"><img src="assets/emblem.png" alt="HuntersGo Emblem"><div class="site-title">HuntersGo</div></div>
+    <nav class="nav">
+      <ul class="desktop-only">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="past_trips.html">Past Trips</a></li>
+        <li><a href="current_mission.html">Current Mission</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="blogs.html" class="active">Blog</a></li>
+      </ul>
+      <button id="menu-toggle" class="menu-toggle">☰</button>
+      <div id="mobile-nav" class="mobile-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="past_trips.html">Past Trips</a></li>
+          <li><a href="current_mission.html">Current Mission</a></li>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+        </ul>
+      </div>
+      <button id="theme-toggle">🌓</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 style="text-align:center;font-family:'Merriweather',serif;color:var(--olive);">Field Notes & Reflections</h1>
+
+    <div class="tabs center" style="margin:1rem 0;">
+      <button class="tab active">Missions</button>
+      <button class="tab">Fundraising</button>
+      <button class="tab">Events</button>
+      <button class="tab">Archive</button>
+    </div>
+
+    <section id="blog-container" class="grid" aria-live="polite">
+      <!-- Example card (images lazy) -->
+      <article class="card">
+        <img src="assets/blog-thumb1.jpg" alt="Blog thumbnail" loading="lazy">
+        <div class="card-body">
+          <div class="meta">June 2025 · Missions</div>
+          <h3 style="font-family:'Merriweather',serif;margin:.5rem 0 .5rem;color:var(--olive)">Building Playgrounds in the Philippines</h3>
+          <p style="color:var(--muted);margin:0 0 1rem;">A quick summary of the project, the team, and the kids we served.</p>
+          <a class="readmore" href="blog.html?id=playground">Read more →</a>
+        </div>
+      </article>
+
+      <!-- More cards... -->
+    </section>
+  </main>
+
+  <footer>
+    <p>“Go therefore and make disciples of all nations...” — Matthew 28:19</p>
+    <p>&copy; 2025 Noah & Hanna Hunter</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // optional: load blogs.json and populate cards (keeps your existing blog.json usage)
+    (async function(){
+      try {
+        const res = await fetch('data/blogs.json');
+        if(!res.ok) return;
+        const posts = await res.json();
+        const container = document.getElementById('blog-container');
+        container.innerHTML = '';
+        posts.forEach(p => {
+          const a = document.createElement('article');
+          a.className = 'card';
+          a.innerHTML = `
+            <img src="${p.thumb || 'assets/blog-thumb1.jpg'}" alt="${p.title}" loading="lazy">
+            <div class="card-body">
+              <div class="meta">${p.date} · ${p.category || 'Missions'}</div>
+              <h3 style="font-family:'Merriweather',serif;color:var(--olive)">${p.title}</h3>
+              <p style="color:var(--muted)">${(p.excerpt || '').slice(0,140)}</p>
+              <a class="readmore" href="blog.html?id=${p.id}">Read more →</a>
+            </div>
+          `;
+          container.appendChild(a);
+        });
+      } catch(e) { /* ignore if no data file */ }
+    })();
+  </script>
+</body>
+</html>
