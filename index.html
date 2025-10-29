@@ -1,97 +1,373 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light dark">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HuntersGo | Noah & Hanna Hunter Missions</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* === HERO SECTION === */
+    .hero {
+      position: relative;
+      min-height: 85vh;
+      background: url('assets/africakids.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(47, 62, 47, 0.45);
+      backdrop-filter: blur(1px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      padding: 0 1rem;
+      animation: fadeIn 2s ease;
+    }
+
+    .hero-content h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background-color 0.3s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--terracotta);
+    }
+
+    /* === DIRECTORY SECTION === */
+    .directory {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      text-align: center;
+      gap: 1rem;
+      padding: 2rem 1rem;
+    }
+
+    .dir-item {
+      background: var(--bg);
+      border-radius: 10px;
+      box-shadow: 0 2px 4px var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      padding: 1.5rem 1rem;
+    }
+
+    .dir-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 10px var(--shadow);
+    }
+
+    .dir-item a {
+      text-decoration: none;
+      color: var(--olive);
+      font-weight: 600;
+      font-family: 'Merriweather', serif;
+    }
+
+    /* === STORIES GRID === */
+    .grid-section {
+      padding: 3rem 1rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .grid-section h2 {
+      text-align: center;
+      font-family: 'Merriweather', serif;
+      color: var(--olive);
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tile {
+      display: block;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      height: 280px;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 3px 8px var(--shadow);
+    }
+
+    .tile:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px var(--shadow);
+    }
+
+    .tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      transition: background 0.3s;
+    }
+
+    .tile:hover::before {
+      background: rgba(0, 0, 0, 0.55);
+    }
+    
+    .tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 1rem;
+    }
+    
+    .tile:hover .tile-overlay {
+      opacity: 1;
+    }
+
+    .tile-overlay h3 {
+      font-family: 'Merriweather', serif;
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .tile-overlay p {
+      font-size: 0.95rem;
+      margin: 0.25rem 0 0;
+    }
+
+    /* Mobile nav z-index fix */
+    .mobile-nav {
+      z-index: 50 !important;
+    }
+
+    /* Theme toggle */
+    #theme-toggle {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: var(--olive);
+      padding: 0.35rem;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Mobile responsive adjustments */
+    @media(max-width: 767px) {
+      .hero {
+        min-height: 60vh;
+      }
+
+      .hero-content h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .directory {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+      }
+
+      .dir-item {
+        padding: 1rem 0.5rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tile {
+        height: 220px;
+      }
+
+      .grid-section {
+        padding: 2rem 1rem;
+      }
+
+      .grid-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    @media(min-width: 768px) and (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(min-width: 1200px) {
+      .hero {
+        min-height: 90vh;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="header" role="banner">
+  <header class="header">
     <div class="logo">
       <img src="assets/emblem.png" alt="HuntersGo Emblem">
-      <div class="site-title">HuntersGo</div>
+      <span class="site-title">HuntersGo</span>
     </div>
-
-    <nav class="nav" role="navigation" aria-label="Main">
-      <ul class="desktop-only">
-        <li><a href="index.html">Home</a></li>
+    
+    <nav class="nav">
+      <!-- Desktop nav -->
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="past_trips.html">Past Trips</a></li>
         <li><a href="current_mission.html">Current Mission</a></li>
         <li><a href="support.html">Support</a></li>
-        <li><a href="blogs.html">Blog</a></li>
+        <li><a href="blog.html">Blog</a></li>
       </ul>
-
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">☰</button>
-      <div id="mobile-nav" class="mobile-nav" role="dialog" aria-hidden="true">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="past_trips.html">Past Trips</a></li>
-          <li><a href="current_mission.html">Current Mission</a></li>
-          <li><a href="support.html">Support</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-
-      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌓</button>
+      
+      <!-- Hamburger menu button (mobile only) -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
     </nav>
+
+    <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
   </header>
 
-  <!-- HERO: keep background image full and cover on all screens -->
-  <section class="hero" style="background-image:url('assets/africakids.png')">
-    <div class="overlay" aria-hidden="true"></div>
-    <div class="hero-content container">
-      <h1 style="font-family:'Merriweather',serif;font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 0.5rem;">Sent to make disciples and bring Christ’s love to the nations</h1>
-      <p style="margin:0 0 1rem;font-size:clamp(.95rem,2.5vw,1.1rem);">Proclaiming the Gospel, teaching obedience, and sending laborers into the harvest.</p>
-      <a class="btn btn-primary" href="current_mission.html">Support Current Mission</a>
+  <!-- Mobile nav dropdown -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="past_trips.html">Past Trips</a></li>
+      <li><a href="current_mission.html">Current Mission</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Sent to make disciples and bring Christ's love to the nations</h1>
+      <p>Proclaiming the Gospel, teaching obedience, and sending laborers into the harvest.</p>
+      <a href="current_mission.html" class="btn-primary">Support Current Mission</a>
     </div>
   </section>
 
-  <main class="container">
-    <section class="directory" aria-label="Quick links">
-      <div class="dir-item"><a href="about.html">About Us</a></div>
-      <div class="dir-item"><a href="past_trips.html">Past Trips</a></div>
-      <div class="dir-item"><a href="current_mission.html">Current Mission</a></div>
-      <div class="dir-item"><a href="support.html">Support</a></div>
-      <div class="dir-item"><a href="blogs.html">Blog</a></div>
-    </section>
+  <section class="directory">
+    <div class="dir-item"><a href="about.html">About Us</a></div>
+    <div class="dir-item"><a href="past_trips.html">Past Trips</a></div>
+    <div class="dir-item"><a href="current_mission.html">Current Mission</a></div>
+    <div class="dir-item"><a href="support.html">Support</a></div>
+    <div class="dir-item"><a href="blog.html">Blog</a></div>
+  </section>
 
-    <section class="grid-section">
-      <h2 class="center" style="font-family:'Merriweather',serif;color:var(--olive);">Latest Stories</h2>
-      <div class="grid" id="stories-grid">
-        <!-- Example tiles. Replace background-image with desired asset URLs -->
-        <a class="tile" href="blogs.html" style="background-image:url('assets/story1.jpg')" aria-label="Story 1">
-          <div class="tile-text">
-            <h3 style="margin:0;font-family:'Merriweather',serif;">Story Title 1</h3>
-            <p style="margin:.25rem 0 0;">Brief summary of the story...</p>
-          </div>
-        </a>
-
-        <a class="tile" href="blogs.html" style="background-image:url('assets/story2.jpg')" aria-label="Story 2">
-          <div class="tile-text">
-            <h3 style="margin:0;font-family:'Merriweather',serif;">Story Title 2</h3>
-            <p style="margin:.25rem 0 0;">Brief summary of the story...</p>
-          </div>
-        </a>
-
-        <a class="tile" href="blogs.html" style="background-image:url('assets/story3.jpg')" aria-label="Story 3">
-          <div class="tile-text">
-            <h3 style="margin:0;font-family:'Merriweather',serif;">Story Title 3</h3>
-            <p style="margin:.25rem 0 0;">Brief summary of the story...</p>
-          </div>
-        </a>
-      </div>
-    </section>
-  </main>
+  <section class="grid-section">
+    <h2>Stories from the Field</h2>
+    <div class="grid">
+      <a href="blog_detail.html?id=kenya2025" class="tile" style="background-image:url('assets/kenya.png')">
+        <div class="tile-overlay">
+          <h3>Nairobi, Kenya</h3>
+          <p>Serving at the City Schools</p>
+        </div>
+      </a>
+      <a href="blog_detail.html?id=philippines2024" class="tile" style="background-image:url('assets/philippines.png')">
+        <div class="tile-overlay">
+          <h3>The Philippines</h3>
+          <p>Working with Kids Taken out of Exploitation</p>
+        </div>
+      </a>
+      <a href="blog_detail.html?id=estonia2025" class="tile" style="background-image:url('assets/estonia.png')">
+        <div class="tile-overlay">
+          <h3>Estonia</h3>
+          <p>Coffee Shop Evangelism</p>
+        </div>
+      </a>
+    </div>
+  </section>
 
   <footer>
-    <p>“Go therefore and make disciples of all nations...” — Matthew 28:19</p>
-    <p>&copy; 2025 Noah & Hanna Hunter | <a href="https://huntersgo.com">HuntersGo</a></p>
+    <p>&copy; 2025 Noah & Hanna Hunter | HuntersGo Missions</p>
+    <p><a href="support.html">Support our work</a> | <a href="about.html">Learn more</a></p>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme) html.setAttribute('data-theme', savedTheme);
+    toggle.addEventListener('click', () => {
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileNav.classList.toggle('open');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+          mobileNav.classList.remove('open');
+        }
+      });
+
+      // Close menu when clicking a link
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('open');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
