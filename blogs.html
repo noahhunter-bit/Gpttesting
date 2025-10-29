@@ -1,16 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HuntersGo | Blog</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ======= CONTAINER ======= */
+    .container {
+      max-width: 1000px;
+      margin: 1.2rem auto;
+      padding: 0 1rem;
+    }
+
+    .page-title {
+      text-align: center;
+      font-family: 'Merriweather', serif;
+      color: var(--olive);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ======= BLOG TABS ======= */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .tab {
+      background: var(--cream);
+      border: 1px solid var(--shadow);
+      border-radius: 6px;
+      padding: .5rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--olive);
+      transition: all .2s ease;
+    }
+    .tab:hover { 
+      background: var(--accent); 
+      color: var(--cream); 
+    }
+    .tab.active { 
+      background: var(--olive); 
+      color: var(--cream); 
+    }
+
+    /* ======= BLOG FEED ======= */
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .card {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      background: var(--cream);
+      border-radius: 10px;
+      box-shadow: 0 6px 18px var(--shadow);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 22px var(--shadow);
+    }
+    .card img {
+      width: 40%;
+      object-fit: cover;
+    }
+    .card-body {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card h3 { 
+      margin: 0 0 .5rem 0; 
+      color: var(--olive);
+      font-family: 'Merriweather', serif;
+    }
+    .meta {
+      font-size: .85rem;
+      color: var(--accent);
+      margin-bottom: .5rem;
+    }
+    .card p {
+      flex: 1;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .readmore {
+      align-self: flex-start;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      transition: color .2s;
+    }
+    .readmore:hover { 
+      color: var(--olive); 
+    }
+
+    /* Mobile nav z-index fix */
+    .mobile-nav {
+      z-index: 50 !important;
+    }
+
+    /* Theme toggle */
+    #theme-toggle {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: var(--olive);
+      padding: 0.35rem;
+    }
+
+    /* ======= MOBILE RESPONSIVE ======= */
+    @media(max-width: 780px) {
+      .card { 
+        flex-direction: column; 
+      }
+      .card img { 
+        width: 100%; 
+        height: 200px; 
+      }
+    }
+
+    @media(max-width: 767px) {
+      .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .tabs {
+        gap: 0.5rem;
+      }
+
+      .tab {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+      }
+
+      .card-body {
+        padding: 0.8rem;
+      }
+
+      .card h3 {
+        font-size: 1.1rem;
+      }
+
+      .meta {
+        font-size: 0.8rem;
+      }
+
+      .card p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="header">
-    <div class="logo"><img src="assets/emblem.png" alt="HuntersGo Emblem"><div class="site-title">HuntersGo</div></div>
+    <div class="logo">
+      <img src="assets/emblem.png" alt="HuntersGo Emblem">
+      <span class="site-title">HuntersGo</span>
+    </div>
+    
     <nav class="nav">
-      <ul class="desktop-only">
+      <!-- Desktop nav -->
+      <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="past_trips.html">Past Trips</a></li>
@@ -18,78 +181,124 @@
         <li><a href="support.html">Support</a></li>
         <li><a href="blogs.html" class="active">Blog</a></li>
       </ul>
-      <button id="menu-toggle" class="menu-toggle">☰</button>
-      <div id="mobile-nav" class="mobile-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="past_trips.html">Past Trips</a></li>
-          <li><a href="current_mission.html">Current Mission</a></li>
-          <li><a href="support.html">Support</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-      <button id="theme-toggle">🌓</button>
+      
+      <!-- Hamburger menu button (mobile only) -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
     </nav>
+
+    <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
   </header>
 
-  <main class="container">
-    <h1 style="text-align:center;font-family:'Merriweather',serif;color:var(--olive);">Field Notes & Reflections</h1>
+  <!-- Mobile nav dropdown -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="past_trips.html">Past Trips</a></li>
+      <li><a href="current_mission.html">Current Mission</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="blogs.html">Blog</a></li>
+    </ul>
+  </nav>
 
-    <div class="tabs center" style="margin:1rem 0;">
-      <button class="tab active">Missions</button>
-      <button class="tab">Fundraising</button>
-      <button class="tab">Events</button>
-      <button class="tab">Archive</button>
+  <div class="container">
+    <h1 class="page-title">Field Notes & Reflections</h1>
+    <div class="tabs">
+      <div class="tab active" data-category="missions">Missions</div>
+      <div class="tab" data-category="fundraising">Fundraising</div>
+      <div class="tab" data-category="events">Events</div>
+      <div class="tab" data-category="archive">Archive</div>
     </div>
 
-    <section id="blog-container" class="grid" aria-live="polite">
-      <!-- Example card (images lazy) -->
-      <article class="card">
-        <img src="assets/blog-thumb1.jpg" alt="Blog thumbnail" loading="lazy">
-        <div class="card-body">
-          <div class="meta">June 2025 · Missions</div>
-          <h3 style="font-family:'Merriweather',serif;margin:.5rem 0 .5rem;color:var(--olive)">Building Playgrounds in the Philippines</h3>
-          <p style="color:var(--muted);margin:0 0 1rem;">A quick summary of the project, the team, and the kids we served.</p>
-          <a class="readmore" href="blog.html?id=playground">Read more →</a>
-        </div>
-      </article>
-
-      <!-- More cards... -->
-    </section>
-  </main>
+    <div id="blog-container" class="grid"></div>
+  </div>
 
   <footer>
-    <p>“Go therefore and make disciples of all nations...” — Matthew 28:19</p>
-    <p>&copy; 2025 Noah & Hanna Hunter</p>
+    <p>"Go therefore and make disciples of all nations..." – Matthew 28:19</p>
+    <p>&copy; 2025 Noah & Hanna Hunter | <a href="https://huntersgo.com">HuntersGo</a></p>
   </footer>
 
-  <script src="js/script.js"></script>
   <script>
-    // optional: load blogs.json and populate cards (keeps your existing blog.json usage)
-    (async function(){
-      try {
-        const res = await fetch('data/blogs.json');
-        if(!res.ok) return;
-        const posts = await res.json();
-        const container = document.getElementById('blog-container');
-        container.innerHTML = '';
-        posts.forEach(p => {
-          const a = document.createElement('article');
-          a.className = 'card';
-          a.innerHTML = `
-            <img src="${p.thumb || 'assets/blog-thumb1.jpg'}" alt="${p.title}" loading="lazy">
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if(saved) html.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileNav.classList.toggle('open');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+          mobileNav.classList.remove('open');
+        }
+      });
+
+      // Close menu when clicking a link
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('open');
+        });
+      });
+    }
+
+    // BLOG FETCH & DISPLAY
+    const blogContainer = document.getElementById('blog-container');
+    const tabs = document.querySelectorAll('.tab');
+
+    async function loadBlogs(category = "missions") {
+      const res = await fetch('data/blogs.json');
+      const blogs = await res.json();
+      blogContainer.innerHTML = '';
+      const now = new Date();
+
+      const sixMonthsAgo = new Date();
+      sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+      
+      blogs
+        .filter(b => {
+          const postDate = new Date(b.date);
+          if (category === "archive") return postDate < sixMonthsAgo;
+          return b.category === category && postDate >= sixMonthsAgo;
+        })
+        .forEach(b => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <img src="${b.image}" alt="${b.title}">
             <div class="card-body">
-              <div class="meta">${p.date} · ${p.category || 'Missions'}</div>
-              <h3 style="font-family:'Merriweather',serif;color:var(--olive)">${p.title}</h3>
-              <p style="color:var(--muted)">${(p.excerpt || '').slice(0,140)}</p>
-              <a class="readmore" href="blog.html?id=${p.id}">Read more →</a>
+              <div class="meta">${b.author} • ${b.location} • ${b.date}</div>
+              <h3>${b.title}</h3>
+              <p>${b.content.substring(0, 180)}...</p>
+              <a href="blog_detail.html?id=${b.id}" class="readmore">Read More →</a>
             </div>
           `;
-          container.appendChild(a);
+          blogContainer.appendChild(card);
         });
-      } catch(e) { /* ignore if no data file */ }
-    })();
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        loadBlogs(tab.dataset.category);
+      });
+    });
+
+    loadBlogs();
   </script>
 </body>
 </html>
