@@ -6,20 +6,32 @@
   <meta name="color-scheme" content="light dark">
   <title>About Us | HuntersGo Missions</title>
   <link rel="stylesheet" href="css/style.css">
+
   <style>
-    /* fine-tune icon sizing without affecting other pages */
+    /* ---- Icon Styling ---- */
     .social-icons img {
       width: 36px;
       height: 36px;
       border-radius: 8px;
-      transition: transform 0.2s ease;
+      filter: grayscale(100%) brightness(0.6) sepia(0.3) hue-rotate(-20deg) saturate(0.8);
+      opacity: 0.85;
+      transition: all 0.3s ease;
     }
-    .social-icons img:hover { transform: scale(1.1); }
+    .social-icons img:hover {
+      filter: none;
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
     @media (max-width: 600px) {
-      .social-icons img { width: 28px; height: 28px; }
+      .social-icons img {
+        width: 28px;
+        height: 28px;
+      }
     }
   </style>
 </head>
+
 <body>
   <!-- ===== HEADER ===== -->
   <header class="header">
@@ -42,7 +54,7 @@
       <div id="mobile-nav" class="mobile-nav">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="about.html" class="active">About</a></li>
           <li><a href="past_trips.html">Past Trips</a></li>
           <li><a href="current_mission.html">Current Mission</a></li>
           <li><a href="support.html">Support</a></li>
@@ -56,7 +68,7 @@
 
   <!-- ===== HERO ===== -->
   <section class="hero" style="background-image:url('assets/h&n.png')">
-    <div class="overlay" aria-hidden="true"></div>
+    <div class="overlay"></div>
     <div class="hero-content container">
       <h1 style="font-family:'Merriweather',serif;margin:0;">About Noah & Hanna</h1>
     </div>
