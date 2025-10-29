@@ -1,124 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light dark" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Past Trips | HuntersGo Missions</title>
-  <link rel="stylesheet" href="css/style.css" />
-
+  <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ---------- Fallback + Responsive Enhancements ---------- */
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      margin: 0;
-      color: var(--text, #222);
-      background: var(--bg, #fafafa);
-    }
-
-    h1, h2, h3 {
+    /* Additional page-specific styles */
+    .section-title {
+      text-align: center;
       font-family: 'Merriweather', serif;
-      color: var(--olive, #445030);
-      margin-bottom: 0.5rem;
+      color: var(--olive);
+      font-size: 2rem;
+      margin: 1.5rem 0 1rem;
     }
 
-    main {
-      padding: 1.25rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    /* --- Map container --- */
-    .map-wrapper {
+    /* Map container */
+    .map-container {
+      position: relative;
       width: 100%;
-      overflow-x: auto;
-      display: flex;
-      justify-content: center;
-      background: var(--card-bg, #fff);
-      padding: 1rem;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      max-width: var(--max-width);
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
-
-    .map-wrapper img,
-    .map-wrapper svg {
+    .map-svg {
       width: 100%;
       height: auto;
-      max-width: 950px;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px var(--shadow);
+    }
+    
+    /* Map markers */
+    .marker {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background-color: var(--terracotta);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    .marker:hover {
+      transform: translate(-50%, -50%) scale(1.3);
+      background-color: var(--accent);
+    }
+    
+    /* Tooltip styling */
+    .marker .tooltip {
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--cream);
+      color: var(--olive);
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 5;
+    }
+    .marker .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: var(--cream) transparent transparent transparent;
+    }
+    .marker:hover .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
     }
 
-    /* --- Trips section --- */
-    .trip-section {
-      margin-top: 2.5rem;
+    /* Trips grid */
+    .trips {
+      max-width: var(--max-width);
+      margin: 2rem auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem 3rem;
     }
-
     .trip-card {
-      background: var(--card-bg, #fff);
-      border-radius: 16px;
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px var(--shadow);
+      background-color: var(--cream);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .trip-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      transform: translateY(-6px);
+      box-shadow: 0 6px 15px var(--shadow);
     }
-
     .trip-card img {
       width: 100%;
-      height: 240px;
+      height: 220px;
       object-fit: cover;
-      display: block;
-      filter: brightness(0.9);
-      transition: filter 0.3s ease;
+      transition: transform 0.4s ease, filter 0.4s ease;
     }
-
     .trip-card:hover img {
-      filter: brightness(1);
+      transform: scale(1.05);
+      filter: brightness(0.75);
     }
-
-    .trip-content {
-      padding: 1.25rem;
-    }
-
-    .trip-content h3 {
-      margin-top: 0;
-      color: var(--olive, #445030);
-    }
-
-    .trip-content p {
-      line-height: 1.6;
-      color: var(--text, #333);
-    }
-
-    footer {
+    .trip-card h3 {
+      font-family: 'Merriweather', serif;
       text-align: center;
-      padding: 1.25rem;
-      font-size: 0.9rem;
-      color: #777;
+      padding: 1rem 1rem 0.5rem;
+      color: var(--olive);
+      margin: 0;
+    }
+    .trip-card .summary {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      text-align: center;
+      font-size: 0.95rem;
+      padding: 0.75rem;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: all 0.3s ease;
+    }
+    .trip-card:hover .summary {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .trip-card a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
 
-    @media (max-width: 600px) {
+    /* Mobile adjustments */
+    @media(max-width: 767px) {
+      .section-title {
+        font-size: 1.5rem;
+        margin: 1rem 0 0.5rem;
+      }
+      .trips {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem 2rem;
+      }
       .trip-card img {
-        height: 200px;
+        height: 180px;
+      }
+      .marker {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    @media(min-width: 768px) and (max-width: 1024px) {
+      .trips {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
 </head>
-
 <body>
-  <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="logo">
       <img src="assets/emblem.png" alt="HuntersGo Emblem">
-      <div class="site-title">HuntersGo</div>
+      <span class="site-title">HuntersGo</span>
     </div>
-
-    <nav class="nav" role="navigation" aria-label="Main">
-      <ul class="desktop-only">
+    
+    <nav class="nav">
+      <!-- Desktop nav -->
+      <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="past_trips.html" class="active">Past Trips</a></li>
@@ -126,74 +190,176 @@
         <li><a href="support.html">Support</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
-
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">☰</button>
-      <div id="mobile-nav" class="mobile-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="past_trips.html" class="active">Past Trips</a></li>
-          <li><a href="current_mission.html">Current Mission</a></li>
-          <li><a href="support.html">Support</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-
-      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌓</button>
+      
+      <!-- Hamburger menu button (mobile only) -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        ☰
+      </button>
     </nav>
+
+    <button id="theme-toggle" style="border:none;background:transparent;cursor:pointer;font-size:1.3rem;color:var(--olive);">🌓</button>
   </header>
 
-  <!-- ===== MAP SECTION ===== -->
-  <section class="map-wrapper">
-    <!-- You can embed or reference your SVG map below -->
-    <img src="assets/world-map.svg" alt="World map with mission markers" loading="lazy">
+  <!-- Mobile nav dropdown -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="past_trips.html">Past Trips</a></li>
+      <li><a href="current_mission.html">Current Mission</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="blogs.html">Blog</a></li>
+    </ul>
+  </nav>
 
-    <!--
-    ⚙️ Future setup:
-    When your blogs are ready, replace the <img> with an inline <object> or <svg> 
-    and attach clickable <a> or <circle> elements to your markers.
-    Example:
-    <object data="assets/world-map.svg" type="image/svg+xml"></object>
-    -->
+  <div class="map-container">
+    <div class="section-title">Where God Has Taken Us</div>
+    <img src="assets/world-map.svg" alt="World Map" class="map-svg">
+    
+    <!-- Map markers -->
+    <div class="marker" data-target="#blog-philippines" style="top: 55.2%; left: 85%;">
+      <span class="tooltip">Philippines & Thailand</span>
+    </div>
+    <div class="marker" data-target="#blog-israel" style="top: 41%; left: 57%;">
+      <span class="tooltip">Israel</span>
+    </div>
+    <div class="marker" data-target="#blog-greece-turkey" style="top: 37%; left: 56%;">
+      <span class="tooltip">Greece & Turkey</span>
+    </div>
+    <div class="marker" data-target="#blog-lasvegas" style="top: 41.5%; left: 14%;">
+      <span class="tooltip">Las Vegas</span>
+    </div>
+    <div class="marker" data-target="#blog-ag-hanna" style="top: 38%; left: 16%;">
+      <span class="tooltip">NE, MO, & CO Camps</span>
+    </div>
+    <div class="marker" data-target="#blog-ag-noah" style="top: 36.5%; left: 16.5%;">
+      <span class="tooltip">SD, ND, & WY Camps</span>
+    </div>
+    <div class="marker" data-target="#blog-kenya" style="top: 60%; left: 55%;">
+      <span class="tooltip">Nairobi, Kenya</span>
+    </div>
+    <div class="marker" data-target="#blog-estonia" style="top: 27%; left: 53%;">
+      <span class="tooltip">Tallinn, Estonia</span>
+    </div>
+  </div>
+
+  <section class="trips">
+    <!-- Philippines & Thailand -->
+    <div class="trip-card">
+      <a href="#blog-philippines">
+        <img src="https://images.squarespace-cdn.com/content/v1/5c8433b57a1fbd79ddc74452/1556703122703-2SIVOAKPS1B219CGZA6N/55536434_2649993458376696_9047445632335216640_o.jpg" alt="Philippines Mission">
+        <h3>Philippines & Thailand (2023–24)</h3>
+        <div class="summary">Serving children and building playgrounds with mission partners.</div>
+      </a>
+    </div>
+    
+    <!-- Israel -->
+    <div class="trip-card">
+      <a href="#blog-israel">
+        <img src="assets/israel.png" alt="Israel Mission">
+        <h3>Israel (2023)</h3>
+        <div class="summary">Exploring the Holy Land's history and culture through missions study.</div>
+      </a>
+    </div>
+    
+    <!-- Greece & Turkey -->
+    <div class="trip-card">
+      <a href="#blog-greece-turkey">
+        <img src="https://www.baptistpress.com/wp-content/uploads/images/364ef963-4d6a-43b1-a74a-5a4248cf84cb-Ephesus.jpg" alt="Greece & Turkey Mission">
+        <h3>Greece & Turkey (2024)</h3>
+        <div class="summary">Walking the footsteps of the early church and teaching gospel truth.</div>
+      </a>
+    </div>
+    
+    <!-- Las Vegas -->
+    <div class="trip-card">
+      <a href="#blog-lasvegas">
+        <img src="https://operationforfreedom.org/wp-content/uploads/2024/01/92616AFD-9AB3-49CF-BCD9-868CD509A9D2-1024x768.jpg" alt="Las Vegas Mission">
+        <h3>Las Vegas (2024)</h3>
+        <div class="summary">Partnering with Operation for Freedom to serve those impacted by exploitation.</div>
+      </a>
+    </div>
+    
+    <!-- AG Camps Hanna -->
+    <div class="trip-card">
+      <a href="#blog-ag-hanna">
+        <img src="https://cdn.forumcomm.com/dims4/default/c89ed8b/2147483647/strip/true/crop/6240x4160+0+0/resize/1599x1066!/quality/90/?url=https://forum-communications-production-web.s3.us-west-2.amazonaws.com/brightspot/b5/4e/42ed92064884b6b9baf9f6dd1c32/img-5386.JPG" alt="AG Camps Hanna">
+        <h3>Nebraska, Montana & Colorado (2024)</h3>
+        <div class="summary">Ministering at youth camps and bringing joy and discipleship.</div>
+      </a>
+    </div>
+    
+    <!-- AG Camps Noah -->
+    <div class="trip-card">
+      <a href="#blog-ag-noah">
+        <img src="https://www.vvaglc.org/uploads/1/2/3/8/123851552/published/2025-youth-camp.png?1745243881=" alt="AG Camps Noah">
+        <h3>South Dakota, Wyoming & North Dakota (2024)</h3>
+        <div class="summary">Serving at regional camps and advancing God's kingdom with teens.</div>
+      </a>
+    </div>
+    
+    <!-- Kenya -->
+    <div class="trip-card">
+      <a href="#blog-kenya">
+        <img src="https://www.goministriesinc.com/uploads/1/6/6/5/16654640/img-3762_orig.jpg" alt="Kenya Mission">
+        <h3>Kenya (2025)</h3>
+        <div class="summary">School ministry reaching over 7,000 children with the gospel.</div>
+      </a>
+    </div>
+    
+    <!-- Estonia -->
+    <div class="trip-card">
+      <a href="#blog-estonia">
+        <img src="https://news.ag.org/-/media/PENews/Images/2025-Article-Images/1400/Coffee-1400.jpg" alt="Estonia Mission">
+        <h3>Estonia (2025)</h3>
+        <div class="summary">Coffee evangelism with Colab, building community through faith.</div>
+      </a>
+    </div>
   </section>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <main>
-    <h1 style="text-align:center;margin-top:1rem;">Past Mission Trips</h1>
-
-    <div class="trip-section">
-      <!-- === REUSED FROM YOUR ORIGINAL CONTENT === -->
-      <!-- Each of these cards keeps your original wording and photo structure -->
-
-      <div class="trip-card">
-        <img src="assets/trip1.jpg" alt="Trip 1">
-        <div class="trip-content">
-          <h3>North Dakota — 2023</h3>
-          <p>Our team served at a local outreach that focused on equipping youth leaders and strengthening the local church. It was a time of growth and hands-on ministry experience that shaped our heart for community discipleship.</p>
-        </div>
-      </div>
-
-      <div class="trip-card">
-        <img src="assets/trip2.jpg" alt="Trip 2">
-        <div class="trip-content">
-          <h3>Montana — 2024</h3>
-          <p>This trip centered around building connections and learning from missionaries who have served in long-term rural ministry. It gave us an inside look at what day-to-day mission life looks like in the field.</p>
-        </div>
-      </div>
-
-      <div class="trip-card">
-        <img src="assets/trip3.jpg" alt="Trip 3">
-        <div class="trip-content">
-          <h3>Arizona — 2022</h3>
-          <p>Before heading into our longer assignments, we joined a short-term mission focused on serving Native communities. It was an incredible opportunity to listen, learn, and grow in cross-cultural ministry.</p>
-        </div>
-      </div>
-    </div>
-  </main>
-
   <footer>
-    <p>&copy; 2025 Noah & Hanna Hunter</p>
+    <p>&copy; 2025 Noah & Hanna Hunter | HuntersGo Missions</p>
+    <p><a href="support.html">Support our work</a></p>
   </footer>
+
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if(saved) html.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    menuToggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('open');
+      }
+    });
+
+    // Marker click linking
+    document.querySelectorAll('.marker').forEach(marker => {
+      marker.addEventListener('click', () => {
+        const target = marker.getAttribute('data-target');
+        if(target) {
+          window.location.href = target;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
 
   <script src="js/script.js"></script>
 </body>
