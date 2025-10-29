@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Current Mission — Las Vegas 2026 | HuntersGo</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo"><img src="assets/emblem.png" alt="Emblem"><div class="site-title">HuntersGo</div></div>
+    <nav class="nav">
+      <ul class="desktop-only">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="past_trips.html">Past Trips</a></li>
+        <li><a href="current_mission.html" class="active">Current Mission</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">☰</button>
+      <div id="mobile-nav" class="mobile-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="past_trips.html">Past Trips</a></li>
+          <li><a href="current_mission.html">Current Mission</a></li>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌓</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero" style="background-image:url('assets/lasvegas-hero.jpg')">
+      <div class="overlay" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1 style="font-family:'Merriweather',serif;margin:0">Heading Back to Las Vegas — 2026</h1>
+        <p style="color:var(--muted)">We’re preparing to return to Las Vegas with Trinity Bible College’s GO Trips program to join Operation for Freedom in outreach, prevention, and community care.</p>
+        <div style="margin-top:.75rem"><a class="btn btn-primary" href="support.html">Partner With Us</a></div>
+      </div>
+    </section>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.25rem">
+      <article class="card story" style="padding:1rem">
+        <h2 style="font-family:'Merriweather',serif;color:var(--olive);margin-top:0;">The Mission</h2>
+        <p style="color:var(--muted)">In 2026, we’ll be returning to Las Vegas with a team …</p>
+
+        <div class="slideshow" aria-roledescription="carousel" style="margin-top:1rem">
+          <div class="slide active"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/92616AFD-9AB3-49CF-BCD9-868CD509A9D2-1024x768.jpg" alt="Operation for Freedom outreach" loading="lazy"></div>
+          <div class="slide"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/IMG_1169-1536x1152.jpg" alt="Operation for Freedom volunteers" loading="lazy"></div>
+          <div class="slide"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/IMG_2249-1536x1152.jpg" alt="Operation for Freedom night outreach" loading="lazy"></div>
+        </div>
+      </article>
+
+      <aside class="card fund-card" style="padding:1rem">
+        <div style="text-align:center"><strong style="font-family:'Merriweather',serif;color:var(--olive)">Funding Our Trip</strong>
+          <p style="color:var(--muted);margin:.5rem 0 1rem">Goal: $3,600 — $1,800 each</p>
+          <div class="fund-meter" style="position:relative;height:28px;background:#e9e1d1;border-radius:16px;overflow:hidden;">
+            <div class="fund-fill" id="fund-fill" style="width:40%;height:100%;background:linear-gradient(90deg,var(--accent),var(--terracotta));"></div>
+            <div style="position:absolute;inset:0;text-align:center;line-height:28px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.4)">Raised: $1,440</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Noah & Hanna Hunter</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
