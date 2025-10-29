@@ -2,76 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noah & Hanna</title>
-  <style>
-    :root {
-      --bg: #f5f5f7;
-      --fg: #222;
-      --accent: #3a7bd5;
-      --accent2: #00d2ff;
-    }
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: var(--fg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    main {
-      background: var(--bg);
-      padding: 2rem 3rem;
-      border-radius: 1rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      text-align: center;
-      animation: fadeIn 1.5s ease;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    p {
-      font-size: 1.1rem;
-      opacity: 0.8;
-    }
-    .pulse {
-      margin-top: 1.5rem;
-      width: 20px;
-      height: 20px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-      margin-inline: auto;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 0.4; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    footer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
+  <title>HuntersGo | Noah & Hanna Hunter Missions</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <main>
-    <h1>Welcome to Noah & Hanna’s Page</h1>
-    <p>A simple start. Built for testing, dreaming, and launching ideas.</p>
-    <div class="pulse"></div>
-    <footer>© <span id="year"></span> Noah & Hanna — Made with ❤️</footer>
+  <header class="header" role="banner">
+    <div class="logo">
+      <img src="assets/emblem.png" alt="HuntersGo Emblem">
+      <div class="site-title">HuntersGo</div>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Main">
+      <ul class="desktop-only">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="past_trips.html">Past Trips</a></li>
+        <li><a href="current_mission.html">Current Mission</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+      </ul>
+
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">☰</button>
+      <div id="mobile-nav" class="mobile-nav" role="dialog" aria-hidden="true">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="past_trips.html">Past Trips</a></li>
+          <li><a href="current_mission.html">Current Mission</a></li>
+          <li><a href="support.html">Support</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌓</button>
+    </nav>
+  </header>
+
+  <!-- HERO: keep background image full and cover on all screens -->
+  <section class="hero" style="background-image:url('assets/africakids.png')">
+    <div class="overlay" aria-hidden="true"></div>
+    <div class="hero-content container">
+      <h1 style="font-family:'Merriweather',serif;font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 0.5rem;">Sent to make disciples and bring Christ’s love to the nations</h1>
+      <p style="margin:0 0 1rem;font-size:clamp(.95rem,2.5vw,1.1rem);">Proclaiming the Gospel, teaching obedience, and sending laborers into the harvest.</p>
+      <a class="btn btn-primary" href="current_mission.html">Support Current Mission</a>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="directory" aria-label="Quick links">
+      <div class="dir-item"><a href="about.html">About Us</a></div>
+      <div class="dir-item"><a href="past_trips.html">Past Trips</a></div>
+      <div class="dir-item"><a href="current_mission.html">Current Mission</a></div>
+      <div class="dir-item"><a href="support.html">Support</a></div>
+      <div class="dir-item"><a href="blogs.html">Blog</a></div>
+    </section>
+
+    <section class="grid-section">
+      <h2 class="center" style="font-family:'Merriweather',serif;color:var(--olive);">Latest Stories</h2>
+      <div class="grid" id="stories-grid">
+        <!-- Example tiles. Replace background-image with desired asset URLs -->
+        <a class="tile" href="blogs.html" style="background-image:url('assets/story1.jpg')" aria-label="Story 1">
+          <div class="tile-text">
+            <h3 style="margin:0;font-family:'Merriweather',serif;">Story Title 1</h3>
+            <p style="margin:.25rem 0 0;">Brief summary of the story...</p>
+          </div>
+        </a>
+
+        <a class="tile" href="blogs.html" style="background-image:url('assets/story2.jpg')" aria-label="Story 2">
+          <div class="tile-text">
+            <h3 style="margin:0;font-family:'Merriweather',serif;">Story Title 2</h3>
+            <p style="margin:.25rem 0 0;">Brief summary of the story...</p>
+          </div>
+        </a>
+
+        <a class="tile" href="blogs.html" style="background-image:url('assets/story3.jpg')" aria-label="Story 3">
+          <div class="tile-text">
+            <h3 style="margin:0;font-family:'Merriweather',serif;">Story Title 3</h3>
+            <p style="margin:.25rem 0 0;">Brief summary of the story...</p>
+          </div>
+        </a>
+      </div>
+    </section>
   </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <footer>
+    <p>“Go therefore and make disciples of all nations...” — Matthew 28:19</p>
+    <p>&copy; 2025 Noah & Hanna Hunter | <a href="https://huntersgo.com">HuntersGo</a></p>
+  </footer>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
