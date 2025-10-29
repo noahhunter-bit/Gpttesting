@@ -1,17 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Support | HuntersGo Missions</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* === Hero Section === */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      background: linear-gradient(180deg, var(--cream), transparent);
+    }
+    .hero h1 {
+      font-family: 'Merriweather', serif;
+      color: var(--olive);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0.5rem auto 0;
+      line-height: 1.6;
+    }
+    .verse {
+      margin-top: 1rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+    .verse small {
+      display: block;
+      color: var(--olive);
+      font-family: 'Merriweather', serif;
+    }
+
+    /* === Main Content === */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* === Giving Section === */
+    .giving {
+      background: var(--cream);
+      padding: 1.5rem;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+    .giving h2 {
+      font-family: 'Merriweather', serif;
+      color: var(--olive);
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+    .giving p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .give-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+      justify-content: space-between;
+    }
+
+    .give-btn {
+      flex: 1;
+      min-width: 230px;
+      text-decoration: none;
+      background: var(--bg);
+      color: var(--text);
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .give-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px var(--shadow);
+    }
+    .give-icon {
+      width: 42px;
+      height: auto;
+      flex-shrink: 0;
+      filter: brightness(0.9) contrast(110%);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    [data-theme="dark"] .give-icon {
+      filter: brightness(1.2) contrast(90%);
+    }
+    .give-btn:hover .give-icon {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+    .give-meta {
+      display: flex;
+      flex-direction: column;
+    }
+    .give-meta .name {
+      font-weight: 700;
+      color: var(--olive);
+    }
+    .give-meta .sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* === Prayer Section === */
+    .prayer {
+      background: var(--cream);
+      padding: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+    .prayer h3 {
+      font-family: 'Merriweather', serif;
+      color: var(--olive);
+      margin-top: 0;
+    }
+    .prayer p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .prayer ul {
+      color: var(--muted);
+      padding-left: 1.2rem;
+      line-height: 1.5;
+    }
+
+    /* === Thank You Section === */
+    .thanks {
+      margin-top: 1.5rem;
+      background: linear-gradient(180deg, #fff6ea, #fbf3e6);
+      border-left: 4px solid var(--terracotta);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px var(--shadow);
+      color: var(--muted);
+    }
+    [data-theme="dark"] .thanks {
+      background: linear-gradient(180deg, var(--cream), #1a1815);
+    }
+    .thanks strong {
+      display: block;
+      color: var(--olive);
+      font-family: 'Merriweather', serif;
+      margin-bottom: 0.3rem;
+    }
+
+    /* === Animations === */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile nav z-index fix */
+    .mobile-nav {
+      z-index: 50 !important;
+    }
+
+    /* Theme toggle */
+    #theme-toggle {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: var(--olive);
+      padding: 0.35rem;
+    }
+
+    /* === Mobile Responsive === */
+    @media(max-width: 960px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width: 767px) {
+      .hero {
+        padding: 2rem 1rem 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+
+      .verse {
+        font-size: 0.9rem;
+      }
+
+      .main-content {
+        padding: 1rem;
+        gap: 1.5rem;
+      }
+
+      .giving {
+        padding: 1rem;
+      }
+
+      .giving h2 {
+        font-size: 1.15rem;
+      }
+
+      .give-row {
+        flex-direction: column;
+      }
+
+      .give-btn {
+        min-width: 100%;
+        padding: 1rem;
+      }
+
+      .give-icon {
+        width: 38px;
+      }
+
+      .prayer {
+        padding: 1rem;
+      }
+
+      .prayer h3 {
+        font-size: 1.1rem;
+      }
+
+      .thanks {
+        padding: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo"><img src="assets/emblem.png" alt="HuntersGo emblem"><div class="site-title">HuntersGo</div></div>
 
+  <header class="header">
+    <div class="logo">
+      <img src="assets/emblem.png" alt="HuntersGo Emblem">
+      <span class="site-title">HuntersGo</span>
+    </div>
+    
     <nav class="nav">
-      <ul class="desktop-only">
+      <!-- Desktop nav -->
+      <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="past_trips.html">Past Trips</a></li>
@@ -19,77 +267,145 @@
         <li><a href="support.html" class="active">Support</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
-
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">☰</button>
-      <div id="mobile-nav" class="mobile-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="past_trips.html">Past Trips</a></li>
-          <li><a href="current_mission.html">Current Mission</a></li>
-          <li><a href="support.html">Support</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-
-      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌓</button>
+      
+      <!-- Hamburger menu button (mobile only) -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
     </nav>
+
+    <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
   </header>
 
-  <main class="container">
-    <section class="hero" style="background-image:url('assets/support-hero.jpg')">
-      <div class="overlay" aria-hidden="true"></div>
-      <div class="hero-content">
-        <h1 style="font-family:'Merriweather',serif;margin:0;">Partner in the Mission</h1>
-        <p style="margin:.5rem 0 0;color:var(--muted)">Your support helps us bring the hope of Christ to those seeking freedom and restoration.</p>
-      </div>
-    </section>
+  <!-- Mobile nav dropdown -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="past_trips.html">Past Trips</a></li>
+      <li><a href="current_mission.html">Current Mission</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="blogs.html">Blog</a></li>
+    </ul>
+  </nav>
 
-    <div style="display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem">
-      <div class="card giving">
-        <div style="padding:1rem">
-          <h2 style="font-family:'Merriweather',serif;color:var(--olive);margin-top:0;">Give to the Mission</h2>
-          <p style="color:var(--muted)">Financial gifts help cover travel, ministry materials, and partnership needs.</p>
+  <section class="hero fade-up">
+    <h1>Partner in the Mission</h1>
+    <p>Your support helps us bring the hope of Christ to those seeking freedom and restoration. Every prayer and gift helps extend His love through the mission field.</p>
+    <span class="verse"><small>2 Corinthians 9:7</small>"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."</span>
+  </section>
 
-          <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:1rem">
-            <a class="btn" href="https://venmo.com/noah04hunter" target="_blank" rel="noopener" style="background:var(--btn-bg);padding:.7rem .9rem;display:flex;align-items:center;gap:.6rem;">
-              <img src="assets/venmo.png" alt="" style="width:36px;height:auto;" loading="lazy">
-              <div>
-                <div style="font-weight:700;color:var(--olive)">@noah04hunter</div>
-                <div style="font-size:.85rem;color:var(--muted)">Venmo</div>
-              </div>
-            </a>
+  <div class="main-content">
+    <!-- Giving Section -->
+    <div class="giving fade-up">
+      <h2>Give to the Mission</h2>
+      <p>Financial gifts help cover travel, ministry materials, and partnership needs with trusted organizations like Operation for Freedom and TBC GO Trips. Each contribution directly fuels the mission work and the people it reaches.</p>
 
-            <a class="btn" href="https://cash.app/$NoahHunter04" target="_blank" rel="noopener" style="background:var(--btn-bg);padding:.7rem .9rem;display:flex;align-items:center;gap:.6rem;">
-              <img src="assets/cashapp.png" alt="" style="width:36px;height:auto;" loading="lazy">
-              <div>
-                <div style="font-weight:700;color:var(--olive)">$NoahHunter04</div>
-                <div style="font-size:.85rem;color:var(--muted)">Cash App</div>
-              </div>
-            </a>
-
-            <a class="btn" href="https://paypal.me/NoahHunter580" target="_blank" rel="noopener" style="background:var(--btn-bg);padding:.7rem .9rem;display:flex;align-items:center;gap:.6rem;">
-              <img src="assets/paypal.png" alt="" style="width:36px;height:auto;" loading="lazy">
-              <div>
-                <div style="font-weight:700;color:var(--olive)">paypal.me/NoahHunter580</div>
-                <div style="font-size:.85rem;color:var(--muted)">PayPal</div>
-              </div>
-            </a>
+      <div class="give-row">
+        <!-- Venmo -->
+        <a class="give-btn" href="https://venmo.com/noah04hunter" target="_blank">
+          <img src="assets/venmo.png" alt="Venmo logo" class="give-icon">
+          <div class="give-meta">
+            <span class="name">@noah04hunter</span>
+            <span class="sub">Venmo</span>
           </div>
-        </div>
+        </a>
+
+        <!-- Cash App -->
+        <a class="give-btn" href="https://cash.app/$NoahHunter04" target="_blank">
+          <img src="assets/cashapp.png" alt="CashApp logo" class="give-icon">
+          <div class="give-meta">
+            <span class="name">$NoahHunter04</span>
+            <span class="sub">Cash App</span>
+          </div>
+        </a>
+
+        <!-- PayPal -->
+        <a class="give-btn" href="https://paypal.me/NoahHunter580" target="_blank">
+          <img src="assets/paypal.png" alt="PayPal logo" class="give-icon">
+          <div class="give-meta">
+            <span class="name">@NoahHunter580</span>
+            <span class="sub">PayPal</span>
+          </div>
+        </a>
+
+        <!-- Trinity -->
+        <a class="give-btn" href="https://trinitybiblecollege.edu/give/go-trips/" target="_blank">
+          <img src="assets/tbc.png" alt="TBC logo" class="give-icon">
+          <div class="give-meta">
+            <span class="name">TBC GO Trips</span>
+            <span class="sub">Instructions on Trinity's site</span>
+          </div>
+        </a>
       </div>
 
-      <div class="thanks card" style="padding:1rem;">
-        <strong style="color:var(--olive);">Thank you</strong>
-        <p style="color:var(--muted);margin:0">Every prayer and gift helps extend the mission work and those it reaches.</p>
+      <div class="thanks fade-up">
+        <strong>Thank You</strong>
+        <p>We are humbled and grateful for your partnership in this mission. Your prayers sustain us, and your generosity makes it possible for us to stand alongside those seeking freedom from exploitation. Thank you for being part of this story of hope and restoration.</p>
       </div>
     </div>
-  </main>
+
+    <!-- Prayer Section -->
+    <aside class="prayer fade-up">
+      <h3>Stand With Us in Prayer</h3>
+      <p>Prayer is the foundation of every mission. If you'd join us in lifting these up, we would be so grateful:</p>
+      <ul>
+        <li>Open hearts and protection for those we'll meet in Las Vegas.</li>
+        <li>Provision and timely support for travel and materials.</li>
+        <li>Unity and strength for our team and local partners.</li>
+        <li>That each conversation plants lasting seeds of faith.</li>
+      </ul>
+    </aside>
+  </div>
 
   <footer>
-    <p>&copy; 2025 Noah & Hanna Hunter</p>
+    <p>© 2025 Noah & Hanna Hunter | HuntersGo Missions</p>
+    <p><a href="support.html">Support our work</a></p>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if(saved) html.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileNav.classList.toggle('open');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+          mobileNav.classList.remove('open');
+        }
+      });
+
+      // Close menu when clicking a link
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('open');
+        });
+      });
+    }
+
+    // Fade-up scroll animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('in-view');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
