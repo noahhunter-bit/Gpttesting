@@ -1,0 +1,67 @@
+[
+  {
+    "id": "philippines-2023-hanna",
+    "category": "missions",
+    "title": "Davao City & Happy Horizons — Hanna (Spring 2023)",
+    "author": "Hanna",
+    "date": "April 12, 2023",
+    "location": "Davao City, Philippines",
+    "excerpt": "We joined local pastors and served a children's ranch that provides safety and care for exploited kids. The community welcomed us with open arms.",
+    "image": "assets/blogs/philippines-2023-1.jpg",
+    "content": "<p>We arrived in Davao City ... (placeholder content — replace with your story).</p><p><img src=\"assets/blogs/philippines-2023-2.jpg\" alt=\"Happy Horizons\" style=\"max-width:100%;height:auto;border-radius:8px\"></p>"
+  },
+  {
+    "id": "thailand-2023-noah",
+    "category": "missions",
+    "title": "Thailand — Culture, Church, and a Playground Build",
+    "author": "Noah",
+    "date": "April 20, 2023",
+    "location": "Chiang Mai, Thailand",
+    "excerpt": "We helped build a playground for a school for disabled students and worshiped with local churches — a humbling, joyful experience.",
+    "image": "assets/blogs/thailand-2023-1.jpg",
+    "content": "<p>In Thailand we worked with local leaders...</p>"
+  },
+  {
+    "id": "lasvegas-2024-hanna",
+    "category": "events",
+    "title": "Las Vegas Outreach — Hanna (Spring 2024)",
+    "author": "Hanna",
+    "date": "April 5, 2024",
+    "location": "Las Vegas, NV",
+    "excerpt": "Partnered with Operation for Freedom on outreach and prevention efforts—an intense but meaningful time.",
+    "image": "assets/blogs/lasvegas-2024-1.jpg",
+    "content": "<p>We worked with Operation for Freedom doing street outreach and handing out resources...</p>"
+  },
+  {
+    "id": "kenya-2025-noah",
+    "category": "missions",
+    "title": "Kenya — School Ministries (Noah, Spring 2025)",
+    "author": "Noah",
+    "date": "May 12, 2025",
+    "location": "Nairobi, Kenya",
+    "excerpt": "Six schools, thousands of children, and lots of bounce house fun — this was a trip that stretched our hearts.",
+    "image": "assets/blogs/kenya-2025-1.jpg",
+    "content": "<p>We visited six schools, held assemblies, and closed with a kids' church — we estimate the gospel reached ~7,000 children over the week.</p>"
+  },
+  {
+    "id": "fundraising-update-2025-11",
+    "category": "fundraising",
+    "title": "Las Vegas 2026 — First Fundraising Checkpoint",
+    "author": "Noah",
+    "date": "October 24, 2025",
+    "location": "Ellendale, ND (planning)",
+    "excerpt": "We’ve launched our first major effort to raise funds for GO Trips — here's the progress and next steps.",
+    "image": "assets/blogs/fundraising-2025-10.jpg",
+    "content": "<p>We are grateful for early supporters... (update content)</p>"
+  },
+  {
+    "id": "testing-the-functions",
+    "category": "fundraising",
+    "title": "Testing For Blogging",
+    "author": "Noah",
+    "date": "October 25,2025",
+    "location": "Ellendale, ND",
+    "excerpt": "I just got this website up, so im making a test.",
+    "content": "<p>Check this out. So, I'm making this website to help Hanna and I fundraise for our GO Trip this year. This is a Test for a blog page. I wanted to see if this would work, so I'm adding my own.</p>"
+  }
+]
