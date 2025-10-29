@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Blog Post — HuntersGo</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo"><img src="assets/emblem.png" alt="HuntersGo Emblem"><div class="site-title">HuntersGo</div></div>
+    <nav class="nav">
+      <ul class="desktop-only">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blogs.html">All Posts</a></li>
+      </ul>
+      <button id="menu-toggle" class="menu-toggle">☰</button>
+      <div id="mobile-nav" class="mobile-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blogs.html">All Posts</a></li>
+        </ul>
+      </div>
+      <button id="theme-toggle">🌓</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <article id="post" style="max-width:900px;margin:1rem auto;">
+      <div class="post-hero" id="post-hero" style="background:var(--cream);padding:1rem;border-radius:10px;box-shadow:0 8px 20px var(--shadow)">
+        <h1 id="post-title" style="font-family:'Merriweather',serif;margin:0">Loading…</h1>
+        <div class="meta" id="post-meta"></div>
+      </div>
+
+      <div class="post-content" id="post-content" style="margin-top:1rem;color:var(--muted);"></div>
+      <a class="back-link" href="blogs.html" style="display:inline-block;margin-top:1rem;color:var(--olive);font-weight:700">← Back to posts</a>
+    </article>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script>
+    function param(name){ const url = new URL(location.href); return url.searchParams.get(name); }
+    (async function loadPost(){
+      const id = param('id');
+      if(!id){ document.getElementById('post-title').textContent = 'Post not found'; return; }
+      try {
+        const res = await fetch('data/blogs.json');
+        if(!res.ok) { document.getElementById('post-title').textContent = 'Post not found'; return; }
+        const posts = await res.json();
+        const p = posts.find(x=>x.id === id);
+        if(!p){ document.getElementById('post-title').textContent = 'Post not found'; return; }
+
+        document.title = p.title + ' — HuntersGo';
+        document.getElementById('post-title').textContent = p.title;
+        document.getElementById('post-meta').textContent = `${p.date} · ${p.location || ''} · ${p.author || ''}`;
+
+        if(p.image){
+          const hero = document.getElementById('post-hero');
+          const img = document.createElement('img');
+          img.src = p.image;
+          img.alt = p.title;
+          img.loading = 'lazy';
+          img.style.width = '100%';
+          img.style.height = '320px';
+          img.style.objectFit = 'cover';
+          img.style.borderRadius = '8px';
+          img.style.marginTop = '.8rem';
+          hero.appendChild(img);
+        }
+        document.getElementById('post-content').innerHTML = p.content || '<p>No content.</p>';
+      } catch(e){
+        document.getElementById('post-title').textContent = 'Post not found';
+      }
+    })();
+  </script>
+</body>
+</html>
