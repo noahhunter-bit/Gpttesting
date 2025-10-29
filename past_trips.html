@@ -3,13 +3,131 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark">
   <title>Past Trips | HuntersGo Missions</title>
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* --- Responsive layout tweaks --- */
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      margin: 0;
+      color: var(--text, #222);
+      background: var(--bg, #fafafa);
+    }
+
+    h1, h2, h3 {
+      font-family: 'Merriweather', serif;
+      color: var(--olive, #445030);
+    }
+
+    /* Hero section */
+    .hero {
+      background-image: url('assets/trip_hero.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      position: relative;
+      padding: 5rem 1rem;
+      text-align: center;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    /* Trip section */
+    .trip-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 1.25rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .trip-card {
+      background: var(--card-bg, #fff);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .trip-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .trip-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9);
+      transition: filter 0.3s ease;
+    }
+
+    .trip-card:hover img {
+      filter: brightness(1);
+    }
+
+    .trip-content {
+      padding: 1.25rem;
+    }
+
+    .trip-content h3 {
+      margin-top: 0;
+      color: var(--olive, #445030);
+    }
+
+    .trip-content p {
+      line-height: 1.6;
+      color: var(--text, #333);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.25rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      .hero {
+        padding: 3rem 1rem;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .trip-card img {
+        height: 200px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- ===== HEADER ===== -->
   <header class="header">
-    <div class="logo"><img src="assets/emblem.png" alt="HuntersGo Emblem"><div class="site-title">HuntersGo</div></div>
-    <nav class="nav">
+    <div class="logo">
+      <img src="assets/emblem.png" alt="HuntersGo Emblem">
+      <div class="site-title">HuntersGo</div>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Main">
       <ul class="desktop-only">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -31,45 +149,47 @@
         </ul>
       </div>
 
-      <button id="theme-toggle">🌓</button>
+      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌓</button>
     </nav>
   </header>
 
-  <main class="container">
-    <section style="text-align:center;margin-top:1rem;">
-      <h1 style="font-family:'Merriweather',serif;color:var(--olive)">Where God Has Taken Us</h1>
-    </section>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <h1>Past Mission Trips</h1>
+  </section>
 
-    <section class="map-container container" style="padding:0 1rem;margin-top:1rem;">
-      <img src="assets/world-map.svg" alt="World Map" class="map-svg" loading="lazy">
-      <!-- Markers are positioned in CSS inline style but are responsive because container scales -->
-      <div style="position:relative;margin-top:.5rem;">
-        <div class="marker" style="position:absolute;top:55%;left:85%"><span class="tooltip">Philippines & Thailand</span></div>
-        <div class="marker" style="position:absolute;top:41%;left:57%"><span class="tooltip">Israel</span></div>
-        <div class="marker" style="position:absolute;top:37%;left:56%"><span class="tooltip">Greece & Turkey</span></div>
-      </div>
-    </section>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <div class="trip-container">
 
-    <section class="trips container" style="margin-top:1rem;">
-      <!-- cards (images use lazy loading) -->
-      <div class="card">
-        <a href="#blog-philippines"><img src="https://images.squarespace-cdn.com/content/v1/5c8433b57a1fbd79ddc74452/1556703122703-2SIVOAKPS1B219CGZA6N/55536434_2649993458376696_9047445632335216640_o.jpg" alt="Philippines Mission" loading="lazy"></a>
-        <div class="card-body">
-          <h3 style="font-family:'Merriweather',serif;color:var(--olive);margin:0;">Philippines & Thailand (2023–24)</h3>
-          <p style="color:var(--muted)">Serving children and building playgrounds with mission partners.</p>
+      <!-- Example trip 1 -->
+      <div class="trip-card">
+        <img src="assets/trip1.jpg" alt="South Sudan Trip 2023">
+        <div class="trip-content">
+          <h3>South Sudan – 2023</h3>
+          <p>Our first extended mission to South Sudan focused on connecting with local pastors, providing supplies, and teaching discipleship training in rural communities. This trip deepened our conviction to return long-term.</p>
         </div>
       </div>
 
-      <div class="card">
-        <a href="#blog-israel"><img src="assets/israel.png" alt="Israel Mission" loading="lazy"></a>
-        <div class="card-body">
-          <h3 style="font-family:'Merriweather',serif;color:var(--olive);margin:0;">Israel (2023)</h3>
-          <p style="color:var(--muted)">Exploring the Holy Land’s history and culture through missions study.</p>
+      <!-- Example trip 2 -->
+      <div class="trip-card">
+        <img src="assets/trip2.jpg" alt="Uganda Mission 2024">
+        <div class="trip-content">
+          <h3>Uganda – 2024</h3>
+          <p>In Uganda, we partnered with missionaries and churches to serve in orphan care, evangelism, and leadership development. We also helped with agricultural projects that supported local sustainability efforts.</p>
         </div>
       </div>
 
-      <!-- add the rest as in your prior file -->
-    </section>
+      <!-- Example trip 3 -->
+      <div class="trip-card">
+        <img src="assets/trip3.jpg" alt="Local Outreach 2022">
+        <div class="trip-content">
+          <h3>Local Outreach – 2022</h3>
+          <p>Before heading overseas, we served locally through church outreach and community programs. These experiences shaped our heart for service and prepared us for what God would do abroad.</p>
+        </div>
+      </div>
+
+    </div>
   </main>
 
   <footer>
