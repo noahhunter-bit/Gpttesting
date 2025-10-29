@@ -1,68 +1,398 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Current Mission — Las Vegas 2026 | HuntersGo</title>
+  <title>Current Mission – Las Vegas 2026 | HuntersGo</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ========== HERO ========== */
+    .hero {
+      background: var(--cream);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px var(--shadow);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .hero h1 {
+      font-family: 'Merriweather', serif;
+      margin: 0;
+      color: var(--olive);
+    }
+    .hero p {
+      margin: .5rem 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .hero-actions { display: flex; gap: .6rem; margin-top: .8rem; justify-content: center; }
+    .btn {
+      background: var(--accent);
+      color: white;
+      padding: .6rem .9rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 3px 8px var(--shadow);
+      display: inline-block;
+    }
+    .btn.secondary {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--olive);
+    }
+
+    /* ========== GRID LAYOUT ========== */
+    .columns { 
+      display: grid; 
+      grid-template-columns: 1fr 380px; 
+      gap: 1.25rem; 
+      margin-top: 1.25rem; 
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1rem;
+    }
+
+    /* ========== STORY / BODY TEXT ========== */
+    .story {
+      background: var(--cream);
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px var(--shadow);
+      line-height: 1.65;
+    }
+    .story h2 {
+      font-family: 'Merriweather', serif;
+      color: var(--olive);
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+    .story p { color: var(--muted); }
+
+    .highlight {
+      margin-top: 1rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 10px;
+      background: linear-gradient(180deg, var(--cream), #fff);
+      border-left: 4px solid var(--terracotta);
+    }
+
+    /* ========== SLIDESHOW ========== */
+    .slideshow { position: relative; border-radius: 10px; overflow: hidden; margin-top: 1rem; }
+    .slide { display: none; }
+    .slide img { width: 100%; height: 300px; object-fit: cover; display: block; }
+    .slide.active { display: block; }
+    .slideshow-controls { display: flex; justify-content: center; gap: .6rem; margin-top: .5rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); opacity: .6; cursor: pointer; }
+    .dot.active { background: var(--accent); opacity: 1; }
+
+    /* ========== SIDEBAR ========== */
+    .sidebar { position: sticky; top: 88px; align-self: start; }
+
+    /* --- Creative fundraising meter --- */
+    .fund-card {
+      background: var(--cream);
+      padding: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px var(--shadow);
+      text-align: center;
+    }
+    .fund-title {
+      font-family: 'Merriweather', serif;
+      color: var(--olive);
+      font-size: 1.2rem;
+    }
+    .fund-desc { color: var(--muted); font-size: .95rem; margin-bottom: 1rem; }
+
+    .fund-meter {
+      position: relative;
+      height: 28px;
+      background: #e9e1d1;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.15);
+    }
+    .fund-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--terracotta));
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
+      transition: width 1.2s ease;
+    }
+    .fund-text {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      line-height: 28px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    /* ========== MAP ========== */
+    .map-box {
+      margin-top: 1rem;
+      background: var(--cream);
+      padding: .6rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px var(--shadow);
+      text-align: center;
+    }
+
+    .us-map {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .us-map img.map-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .map-svg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    .flight-marker {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--olive);
+      border: 3px solid var(--accent);
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    
+    .flight-marker .tip {
+      position: absolute;
+      bottom: 140%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cream);
+      color: var(--olive);
+      padding: .25rem .5rem;
+      border-radius: 6px;
+      box-shadow: 0 3px 8px var(--shadow);
+      opacity: 0;
+      transition: opacity .2s;
+      white-space: nowrap;
+      font-size: 0.85rem;
+    }
+    
+    .flight-marker:hover .tip {
+      opacity: 1;
+    }
+
+    /* Mobile nav z-index fix */
+    .mobile-nav {
+      z-index: 50 !important;
+    }
+
+    /* Theme toggle */
+    #theme-toggle {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: var(--olive);
+      padding: 0.35rem;
+    }
+
+    /* ========== MOBILE RESPONSIVE ========== */
+    @media(max-width:980px) { 
+      .columns { 
+        grid-template-columns: 1fr; 
+      }
+      
+      .sidebar {
+        position: static;
+      }
+    }
+
+    @media(max-width: 767px) {
+      .hero {
+        padding: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+
+      .story {
+        padding: 1rem;
+      }
+
+      .story h2 {
+        font-size: 1.15rem;
+      }
+
+      .slide img {
+        height: 200px;
+      }
+
+      .fund-card {
+        padding: 1rem;
+      }
+
+      .fund-title {
+        font-size: 1.1rem;
+      }
+
+      .flight-marker {
+        width: 14px;
+        height: 14px;
+      }
+
+      .flight-marker .tip {
+        font-size: 0.75rem;
+        padding: .2rem .4rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="header">
-    <div class="logo"><img src="assets/emblem.png" alt="Emblem"><div class="site-title">HuntersGo</div></div>
+    <div class="logo">
+      <img src="assets/emblem.png" alt="HuntersGo Emblem">
+      <span class="site-title">HuntersGo</span>
+    </div>
+    
     <nav class="nav">
-      <ul class="desktop-only">
+      <!-- Desktop nav -->
+      <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="past_trips.html">Past Trips</a></li>
         <li><a href="current_mission.html" class="active">Current Mission</a></li>
         <li><a href="support.html">Support</a></li>
         <li><a href="blogs.html">Blog</a></li>
       </ul>
-
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">☰</button>
-      <div id="mobile-nav" class="mobile-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="past_trips.html">Past Trips</a></li>
-          <li><a href="current_mission.html">Current Mission</a></li>
-          <li><a href="support.html">Support</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-
-      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌓</button>
+      
+      <!-- Hamburger menu button (mobile only) -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
     </nav>
+
+    <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
   </header>
 
+  <!-- Mobile nav dropdown -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="past_trips.html">Past Trips</a></li>
+      <li><a href="current_mission.html">Current Mission</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="blogs.html">Blog</a></li>
+    </ul>
+  </nav>
+
   <main class="container">
-    <section class="hero" style="background-image:url('assets/lasvegas-hero.jpg')">
-      <div class="overlay" aria-hidden="true"></div>
-      <div class="hero-content">
-        <h1 style="font-family:'Merriweather',serif;margin:0">Heading Back to Las Vegas — 2026</h1>
-        <p style="color:var(--muted)">We’re preparing to return to Las Vegas with Trinity Bible College’s GO Trips program to join Operation for Freedom in outreach, prevention, and community care.</p>
-        <div style="margin-top:.75rem"><a class="btn btn-primary" href="support.html">Partner With Us</a></div>
+    <section class="hero">
+      <div>
+        <h1>Heading Back to Las Vegas – 2026</h1>
+        <p>We're preparing to return to Las Vegas with Trinity Bible College's GO Trips program to join Operation for Freedom in outreach, prevention, and community care. Below you'll find our story, our partners, and how to walk with us in prayer and support.</p>
+        <div class="hero-actions">
+          <a class="btn" href="support.html">Partner With Us</a>
+        </div>
       </div>
     </section>
 
-    <div style="display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.25rem">
-      <article class="card story" style="padding:1rem">
-        <h2 style="font-family:'Merriweather',serif;color:var(--olive);margin-top:0;">The Mission</h2>
-        <p style="color:var(--muted)">In 2026, we’ll be returning to Las Vegas with a team …</p>
+    <div class="columns">
+      <!-- Story Section -->
+      <div>
+        <div class="story">
+          <h2>The Mission</h2>
+          <p>In 2026, we'll be returning to Las Vegas with a team from Trinity Bible College through the GO Trips program. There, we'll work alongside <strong>Operation for Freedom</strong> – a faith-based outreach dedicated to ending trafficking and exploitation by meeting people with compassion, practical help, and the hope of Jesus.</p>
 
-        <div class="slideshow" aria-roledescription="carousel" style="margin-top:1rem">
-          <div class="slide active"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/92616AFD-9AB3-49CF-BCD9-868CD509A9D2-1024x768.jpg" alt="Operation for Freedom outreach" loading="lazy"></div>
-          <div class="slide"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/IMG_1169-1536x1152.jpg" alt="Operation for Freedom volunteers" loading="lazy"></div>
-          <div class="slide"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/IMG_2249-1536x1152.jpg" alt="Operation for Freedom night outreach" loading="lazy"></div>
+          <p>Operation for Freedom's work centers around direct outreach, prevention, and care partnerships. In Las Vegas, that means mobilizing teams into the community, engaging those vulnerable to exploitation, and building trusted relationships that open doors to long-term restoration. It's kingdom work that meets people where they are and offers a way forward.</p>
+
+          <div class="highlight">
+            <p><strong>GO Trips at Trinity Bible College</strong> are immersive service experiences that give students hands-on ministry training in cross-cultural contexts. For us, this means joining God's heart for people by stepping out in obedience and compassion—serving alongside those already faithfully present in their city.</p>
+          </div>
+
+          <!-- Slideshow -->
+          <div class="slideshow">
+            <div class="slide active"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/92616AFD-9AB3-49CF-BCD9-868CD509A9D2-1024x768.jpg" alt="Operation for Freedom outreach"></div>
+            <div class="slide"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/IMG_1169-1536x1152.jpg" alt="Operation for Freedom volunteers"></div>
+            <div class="slide"><img src="https://operationforfreedom.org/wp-content/uploads/2024/01/IMG_2249-1536x1152.jpg" alt="Operation for Freedom night outreach"></div>
+          </div>
+          <div class="slideshow-controls">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+          </div>
+
+          <p style="margin-top:1.3rem;color:var(--muted);font-style:italic;">
+            Every prayer, every word of encouragement, every act of generosity brings us one step closer to reaching those who need to hear that they are seen, valued, and loved.
+          </p>
         </div>
-      </article>
+      </div>
 
-      <aside class="card fund-card" style="padding:1rem">
-        <div style="text-align:center"><strong style="font-family:'Merriweather',serif;color:var(--olive)">Funding Our Trip</strong>
-          <p style="color:var(--muted);margin:.5rem 0 1rem">Goal: $3,600 — $1,800 each</p>
-          <div class="fund-meter" style="position:relative;height:28px;background:#e9e1d1;border-radius:16px;overflow:hidden;">
-            <div class="fund-fill" id="fund-fill" style="width:40%;height:100%;background:linear-gradient(90deg,var(--accent),var(--terracotta));"></div>
-            <div style="position:absolute;inset:0;text-align:center;line-height:28px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.4)">Raised: $1,440</div>
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="fund-card">
+          <div class="fund-title">Funding Our Trip</div>
+          <div class="fund-desc">Goal: $3,600 – $1,800 each</div>
+
+          <div class="fund-meter">
+            <div class="fund-fill" id="fund-fill"></div>
+            <div class="fund-text" id="fund-text"></div>
+          </div>
+
+          <div style="font-size:.9rem;color:var(--muted);margin-top:1rem;">
+            Deadlines:<br>
+            • Nov 14 – $1,000 (team) / $500 each<br>
+            • Dec 4 – another $1,000 / $500 each<br>
+            • Balance before departure
+          </div>
+
+          <div style="margin-top:1rem;">
+            <a href="support.html" class="btn">Support This Mission</a>
+          </div>
+        </div>
+
+        <div class="map-box" id="map">
+          <div style="font-family:'Merriweather',serif;color:var(--olive);margin-bottom:.5rem;text-align:center;">
+            Mission Route
+          </div>
+          <div class="us-map">
+            <img src="assets/us-map.png" alt="U.S. Mission Route Map" class="map-img">
+            <svg class="map-svg-overlay" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="gline" x1="0%" x2="100%">
+                  <stop offset="0%" stop-color="#c89a2f"/>
+                  <stop offset="100%" stop-color="#a65a3e"/>
+                </linearGradient>
+              </defs>
+              <path d="M450,100 C300,150 225,200 185,280" fill="none" stroke="url(#gline)" stroke-width="5" stroke-linecap="round"></path>
+            </svg>
+            <div class="flight-marker" style="left:45.7%; top:20%;">
+              <span class="tip">Ellendale, ND</span>
+            </div>
+            <div class="flight-marker" style="left:18%; top:50%;">
+              <span class="tip">Las Vegas, NV</span>
+            </div>
           </div>
         </div>
       </aside>
@@ -70,9 +400,68 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 Noah & Hanna Hunter</p>
+    <p>© 2025 Noah & Hanna Hunter | HuntersGo Missions</p>
+    <p><a href="support.html">Support our work</a></p>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if(saved) html.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileNav.classList.toggle('open');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+          mobileNav.classList.remove('open');
+        }
+      });
+
+      // Close menu when clicking a link
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('open');
+        });
+      });
+    }
+
+    // Slideshow rotation
+    (function(){
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      let idx = 0;
+      function show(i){
+        slides.forEach(s=>s.classList.remove('active'));
+        dots.forEach(d=>d.classList.remove('active'));
+        slides[i].classList.add('active');
+        dots[i].classList.add('active');
+      }
+      dots.forEach(d=>d.addEventListener('click', ()=>{ idx = Number(d.dataset.index); show(idx); }));
+      setInterval(()=>{ idx = (idx+1)%slides.length; show(idx); }, 6000);
+    })();
+
+    // Fundraising meter (edit numbers below manually)
+    const goal = 3600;
+    const raised = 405; // <-- manually edit this number only
+    const pct = Math.min(100, (raised/goal)*100);
+    document.getElementById('fund-fill').style.width = pct + '%';
+    document.getElementById('fund-text').textContent = `$${raised.toLocaleString()} / $${goal.toLocaleString()} (${Math.round(pct)}%)`;
+  </script>
 </body>
 </html>
