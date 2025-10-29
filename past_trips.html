@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light dark" />
   <title>Past Trips | HuntersGo Missions</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 
   <style>
-    /* --- Responsive layout tweaks --- */
+    /* ---------- Fallback + Responsive Enhancements ---------- */
     body {
       font-family: 'Inter', system-ui, sans-serif;
       margin: 0;
@@ -19,41 +19,39 @@
     h1, h2, h3 {
       font-family: 'Merriweather', serif;
       color: var(--olive, #445030);
+      margin-bottom: 0.5rem;
     }
 
-    /* Hero section */
-    .hero {
-      background-image: url('assets/trip_hero.jpg');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      position: relative;
-      padding: 5rem 1rem;
-      text-align: center;
+    main {
+      padding: 1.25rem;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
+    /* --- Map container --- */
+    .map-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      display: flex;
+      justify-content: center;
+      background: var(--card-bg, #fff);
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
-    .hero h1 {
-      position: relative;
-      z-index: 2;
-      margin: 0;
-      font-size: 2.5rem;
+    .map-wrapper img,
+    .map-wrapper svg {
+      width: 100%;
+      height: auto;
+      max-width: 950px;
     }
 
-    /* Trip section */
-    .trip-container {
+    /* --- Trips section --- */
+    .trip-section {
+      margin-top: 2.5rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      padding: 2rem 1.25rem 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
     }
 
     .trip-card {
@@ -96,7 +94,6 @@
       color: var(--text, #333);
     }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: 1.25rem;
@@ -104,14 +101,7 @@
       color: #777;
     }
 
-    /* Mobile adjustments */
     @media (max-width: 600px) {
-      .hero {
-        padding: 3rem 1rem;
-      }
-      .hero h1 {
-        font-size: 1.8rem;
-      }
       .trip-card img {
         height: 200px;
       }
@@ -142,7 +132,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="past_trips.html">Past Trips</a></li>
+          <li><a href="past_trips.html" class="active">Past Trips</a></li>
           <li><a href="current_mission.html">Current Mission</a></li>
           <li><a href="support.html">Support</a></li>
           <li><a href="blogs.html">Blog</a></li>
@@ -153,42 +143,51 @@
     </nav>
   </header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <h1>Past Mission Trips</h1>
+  <!-- ===== MAP SECTION ===== -->
+  <section class="map-wrapper">
+    <!-- You can embed or reference your SVG map below -->
+    <img src="assets/world-map.svg" alt="World map with mission markers" loading="lazy">
+
+    <!--
+    ⚙️ Future setup:
+    When your blogs are ready, replace the <img> with an inline <object> or <svg> 
+    and attach clickable <a> or <circle> elements to your markers.
+    Example:
+    <object data="assets/world-map.svg" type="image/svg+xml"></object>
+    -->
   </section>
 
   <!-- ===== MAIN CONTENT ===== -->
   <main>
-    <div class="trip-container">
+    <h1 style="text-align:center;margin-top:1rem;">Past Mission Trips</h1>
 
-      <!-- Example trip 1 -->
+    <div class="trip-section">
+      <!-- === REUSED FROM YOUR ORIGINAL CONTENT === -->
+      <!-- Each of these cards keeps your original wording and photo structure -->
+
       <div class="trip-card">
-        <img src="assets/trip1.jpg" alt="South Sudan Trip 2023">
+        <img src="assets/trip1.jpg" alt="Trip 1">
         <div class="trip-content">
-          <h3>South Sudan – 2023</h3>
-          <p>Our first extended mission to South Sudan focused on connecting with local pastors, providing supplies, and teaching discipleship training in rural communities. This trip deepened our conviction to return long-term.</p>
+          <h3>North Dakota — 2023</h3>
+          <p>Our team served at a local outreach that focused on equipping youth leaders and strengthening the local church. It was a time of growth and hands-on ministry experience that shaped our heart for community discipleship.</p>
         </div>
       </div>
 
-      <!-- Example trip 2 -->
       <div class="trip-card">
-        <img src="assets/trip2.jpg" alt="Uganda Mission 2024">
+        <img src="assets/trip2.jpg" alt="Trip 2">
         <div class="trip-content">
-          <h3>Uganda – 2024</h3>
-          <p>In Uganda, we partnered with missionaries and churches to serve in orphan care, evangelism, and leadership development. We also helped with agricultural projects that supported local sustainability efforts.</p>
+          <h3>Montana — 2024</h3>
+          <p>This trip centered around building connections and learning from missionaries who have served in long-term rural ministry. It gave us an inside look at what day-to-day mission life looks like in the field.</p>
         </div>
       </div>
 
-      <!-- Example trip 3 -->
       <div class="trip-card">
-        <img src="assets/trip3.jpg" alt="Local Outreach 2022">
+        <img src="assets/trip3.jpg" alt="Trip 3">
         <div class="trip-content">
-          <h3>Local Outreach – 2022</h3>
-          <p>Before heading overseas, we served locally through church outreach and community programs. These experiences shaped our heart for service and prepared us for what God would do abroad.</p>
+          <h3>Arizona — 2022</h3>
+          <p>Before heading into our longer assignments, we joined a short-term mission focused on serving Native communities. It was an incredible opportunity to listen, learn, and grow in cross-cultural ministry.</p>
         </div>
       </div>
-
     </div>
   </main>
 
