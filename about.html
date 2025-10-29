@@ -6,8 +6,22 @@
   <meta name="color-scheme" content="light dark">
   <title>About Us | HuntersGo Missions</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* fine-tune icon sizing without affecting other pages */
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      transition: transform 0.2s ease;
+    }
+    .social-icons img:hover { transform: scale(1.1); }
+    @media (max-width: 600px) {
+      .social-icons img { width: 28px; height: 28px; }
+    }
+  </style>
 </head>
 <body>
+  <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="logo">
       <img src="assets/emblem.png" alt="HuntersGo Emblem">
@@ -40,42 +54,46 @@
     </nav>
   </header>
 
+  <!-- ===== HERO ===== -->
   <section class="hero" style="background-image:url('assets/h&n.png')">
     <div class="overlay" aria-hidden="true"></div>
     <div class="hero-content container">
-      <h1 style="font-family:'Merriweather',serif;margin:0;">About Us</h1>
+      <h1 style="font-family:'Merriweather',serif;margin:0;">About Noah & Hanna</h1>
     </div>
   </section>
 
+  <!-- ===== MAIN CONTENT ===== -->
   <main class="container">
     <section style="max-width:850px;margin:1.25rem auto;">
       <h2 style="font-family:'Merriweather',serif;color:var(--olive)">Our Story</h2>
-      <!-- Keep your original about content (trimmed for clarity here) -->
-      <p>We met at Trinity Bible College and Graduate School…</p>
-      <p>We got married in May 2025…</p>
+      <p>We met at Trinity Bible College and Graduate School. Both of us were pursuing God’s calling and had been individually following the direction of the Lord for years before we even met each other. We quickly realized that our callings to the mission field aligned in a beautiful way. Hanna has had a heart for people and ministry from a young age and has served in church and ministry roles for years. Noah has felt called to the mission field ever since God spoke to him about South Sudan when he was in middle school.</p>
+
+      <p>After a season of prayer, discipleship, and growth, we got married in May 2025! God has continued to confirm His call on our lives and give us opportunities to serve Him both at home and abroad. Our marriage is a partnership that aims to bring the love of Christ to the nations and to the people He places in front of us every day.</p>
 
       <h2 style="font-family:'Merriweather',serif;color:var(--olive)">Our Calling</h2>
-      <p>Noah was in 7th grade when God gave him a vivid calling to South Sudan…</p>
+      <p>Noah was in 7th grade when God gave him a vivid calling to South Sudan. Through prayer and confirmation, God made it clear that this would one day be a place where He would send Noah. Over the years, God has expanded that calling to include Hanna as well. Together, we feel burdened to reach the unreached and equip believers to take the Gospel where it has not yet been proclaimed.</p>
+
+      <p>In this current season, we are preparing and training to be long-term missionaries. That includes finishing our education, connecting with mentors, serving in short-term missions, and continuing to build a foundation of prayer and support. Every trip we take and every conversation we have is another step toward the field God is preparing for us.</p>
 
       <h2 style="font-family:'Merriweather',serif;color:var(--olive)">Our Vision</h2>
-      <p><em>"Here I am. Send me!"</em> (Isaiah 6:8) — This is the heartbeat of our lives.</p>
+      <p><em>"Here I am. Send me!"</em> (Isaiah 6:8) — This verse captures our heart. We want to live fully surrendered to Christ, willing to go wherever He calls. Our vision is to make disciples, teach the Word, and see communities transformed by the love and truth of Jesus. Whether that’s in a remote village, a large city, or across the street, our goal is the same — to know Him and to make Him known.</p>
     </section>
 
-    <section class="social-section center">
-      <h2 style="font-family:'Merriweather',serif;color:var(--olive)">Connect</h2>
-      <div class="social-container" style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+    <section class="social-section center" style="margin-top:2rem;">
+      <h2 style="font-family:'Merriweather',serif;color:var(--olive)">Connect With Us</h2>
+      <div class="social-container" style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1rem;">
         <div class="social-person">
-          <h3 style="color:var(--accent)">Noah</h3>
-          <div class="social-icons">
-            <a href="#"><img src="assets/facebook.png" alt="Facebook" loading="lazy"></a>
-            <a href="#"><img src="assets/instagram.png" alt="Instagram" loading="lazy"></a>
+          <h3 style="color:var(--accent);margin-bottom:.5rem;">Noah</h3>
+          <div class="social-icons" style="display:flex;gap:.75rem;justify-content:center;">
+            <a href="https://facebook.com" target="_blank" rel="noopener"><img src="assets/facebook.png" alt="Noah on Facebook" loading="lazy"></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener"><img src="assets/instagram.png" alt="Noah on Instagram" loading="lazy"></a>
           </div>
         </div>
         <div class="social-person">
-          <h3 style="color:var(--accent)">Hanna</h3>
-          <div class="social-icons">
-            <a href="#"><img src="assets/facebook.png" alt="Facebook" loading="lazy"></a>
-            <a href="#"><img src="assets/instagram.png" alt="Instagram" loading="lazy"></a>
+          <h3 style="color:var(--accent);margin-bottom:.5rem;">Hanna</h3>
+          <div class="social-icons" style="display:flex;gap:.75rem;justify-content:center;">
+            <a href="https://facebook.com" target="_blank" rel="noopener"><img src="assets/facebook.png" alt="Hanna on Facebook" loading="lazy"></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener"><img src="assets/instagram.png" alt="Hanna on Instagram" loading="lazy"></a>
           </div>
         </div>
       </div>
