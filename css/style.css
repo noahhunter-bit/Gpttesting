@@ -87,6 +87,41 @@ img{max-width:100%;height:auto;display:block}
   border-left: 1px solid rgba(0,0,0,0.02);
   padding:1rem;
 }
+/* Header contact info */
+.header-contact {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.header-contact a {
+  color: var(--olive);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.header-contact a:hover {
+  color: var(--accent);
+}
+
+/* Hide header contact on mobile to save space */
+@media(max-width: 767px) {
+  .header-contact {
+    display: none;
+  }
+}
+
+/* Footer contact styling */
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+footer a:hover {
+  color: var(--olive);
+}
 .mobile-nav ul{flex-direction:column;display:flex;gap:.75rem}
 .mobile-nav a{display:block;padding:.6rem .8rem;border-radius:8px}
 
