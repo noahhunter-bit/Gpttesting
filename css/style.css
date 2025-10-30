@@ -90,8 +90,10 @@ img{max-width:100%;height:auto;display:block}
 /* Header contact info */
 .header-contact {
   display: flex;
+  flex-direction: column; 
   gap: 1rem;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
+  text-align: right;
 }
 
 .header-contact a {
@@ -99,6 +101,7 @@ img{max-width:100%;height:auto;display:block}
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s;
+  white-space: nowrap;
 }
 
 .header-contact a:hover {
