@@ -54,21 +54,24 @@
         <li><a href="blogs.html">Blog</a></li>
       </ul>
 
-      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">☰</button>
-      <div id="mobile-nav" class="mobile-nav">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" class="active">About</a></li>
-          <li><a href="past_trips.html">Past Trips</a></li>
-          <li><a href="current_mission.html">Current Mission</a></li>
-          <li><a href="support.html">Support</a></li>
-          <li><a href="blogs.html">Blog</a></li>
-        </ul>
-      </div>
-
-      <button id="theme-toggle" aria-pressed="false" title="Toggle theme">🌓</button>
+      <!-- Hamburger menu button (mobile only) -->
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">☰</button>
     </nav>
+
+    <button id="theme-toggle" aria-label="Toggle theme">🌓</button>
   </header>
+
+  <!-- Mobile nav dropdown -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="past_trips.html">Past Trips</a></li>
+      <li><a href="current_mission.html">Current Mission</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </nav>
 
   <!-- ===== HERO ===== -->
   <section class="hero" style="background-image:url('assets/h&n.png')">
